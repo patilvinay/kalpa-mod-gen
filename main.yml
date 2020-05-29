@@ -6,88 +6,41 @@ kalpa:
       directory: ./
 
   play:
-    - name: make out dir
+    - name: make dir {{item}}
       kalpa-file:
         action: mkdir
         dir: "{{ imported.config.outDir }}"
+      loop:
+        - "{{ imported.config.outDir }}"
+        - "{{ imported.config.outDir }}/lib"
 
-    - name: make libdir
-      kalpa-file:
-        action: mkdir
-        dir: "{{ imported.config.outDir }}/lib"
-
-    - name: Render template
+    - name: Render {{item}}
       kalpa-ejs:
         vars:
-          template: "{{env.PWD}}/templates/README.ejs.md"
-          dest: "{{ imported.config.outDir }}/README.md"
+          template: "{{env.PWD}}/templates/{{item}}"
+          dest: "{{ imported.config.outDir }}/{{item}}"
+      loop:
+        - README.md
+        - LICENSE
+        - package.json
+        - Dockerfile
 
-    - name: Coping editorconfig
+    - name: Coping {{item}}
       kalpa-ejs:
         vars:
-          template: "{{env.PWD}}/templates/editorconfig"
-          dest: "{{ imported.config.outDir }}/.editorconfig"
-
-    - name: Coping .eslintignore
-      kalpa-ejs:
-        vars:
-          template: "{{env.PWD}}/templates/eslintignore"
-          dest: "{{ imported.config.outDir }}/.eslintignore"
-
-    - name: Coping .gitignore
-      kalpa-ejs:
-        vars:
-          template: "{{env.PWD}}/templates/gitignore"
-          dest: "{{ imported.config.outDir }}/.gitignore"
-
-    - name: Coping prettier.config.js
-      kalpa-ejs:
-        vars:
-          template: "{{env.PWD}}/templates/prettier.config.js"
-          dest: "{{ imported.config.outDir }}/.prettier.config.js"
-
-    - name: Coping travis.config.js
-      kalpa-ejs:
-        vars:
-          template: "{{env.PWD}}/templates/travis.yml"
-          dest: "{{ imported.config.outDir }}/.travis.yml"
-
-    - name: Coping Dockerfile
-      kalpa-ejs:
-        vars:
-          template: "{{env.PWD}}/templates/Dockerfile"
-          dest: "{{ imported.config.outDir }}/Dockerfile"
-
-    - name: Coping releaserc
-      kalpa-ejs:
-        vars:
-          template: "{{env.PWD}}/templates/releaserc"
-          dest: "{{ imported.config.outDir }}/.releaserc"
-
-    - name: Coping npmignore
-      kalpa-ejs:
-        vars:
-          template: "{{env.PWD}}/templates/npmignore"
-          dest: "{{ imported.config.outDir }}/.npmignore"
+          template: "{{env.PWD}}/templates/{{item}}"
+          dest: "{{ imported.config.outDir }}/.{{item}}"
+      loop:
+        - editorconfig
+        - eslintignore
+        - gitignore
+        - prettier.config.js
+        - travis.yml
+        - releaserc
+        - npmignore
 
     - name: Coping index.js
       kalpa-ejs:
         vars:
-          template: "{{env.PWD}}/templates/index.ejs.js"
+          template: "{{env.PWD}}/templates/index.js"
           dest: "{{ imported.config.outDir }}/lib/index.js"
-
-    - name: Coping package.json
-      kalpa-ejs:
-        vars:
-          template: "{{env.PWD}}/templates/package.ejs.json"
-          dest: "{{ imported.config.outDir }}/package.json"
-    - name: Coping License
-      kalpa-ejs:
-        vars:
-          template: "{{env.PWD}}/templates/LICENSE"
-          dest: "{{ imported.config.outDir }}/LICENSE"
-    # - name: Copy file
-    #   kalpa-file:
-    #     action: copy-file
-    #     src: "{{env.PWD}}/out"
-    #     dest: "{{ importes.config.outDir }}"

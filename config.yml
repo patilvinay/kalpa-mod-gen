@@ -1,0 +1,14 @@
+kalpa:
+  vars:
+    #outDir: "{{env.HOME}}/d2/kalpam-modules"
+    outDir: "{{env.PWD}}/out/" #<====
+    moduleName: kalpa-net #<====
+    repo: "git@github.com:{{ vars.git.user }}/{{ vars.moduleName }}.git"
+    author: Vinay Patil #<====
+    email: vinay.hpatil@gmail.com #<====
+    license: Apache-2.0 #<====
+    initialVersion: 0.0.0 #<====
+    git:
+      author: "{{vars.author}}"
+      user: patilvinay #<====
+      email: "{{vars.email}}"

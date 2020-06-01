@@ -1,14 +1,15 @@
 kalpa:
   vars:
     #outDir: "{{env.HOME}}/d2/kalpam-modules"
-    outDir: "{{env.PWD}}/out/" #<====
-    moduleName: kalpa-net #<====
-    repo: "git@github.com:{{ vars.git.user }}/{{ vars.moduleName }}.git"
+    outDir: "{{env.PWD}}/{{vars.moduleName}}"
+    moduleName: kalpa-sample #<==== *modify
+    repo: "git@github.com:{{ vars.git.user }}/{{ vars.moduleName }}.git" #<==== modify if needed
     author: Vinay Patil #<====
-    email: vinay.hpatil@gmail.com #<====
-    license: Apache-2.0 #<====
-    initialVersion: 0.0.0 #<====
+    user: patilvinay #<====
+    email: vinay.hpatil@gmail.com #<====  *modify
+    license: Apache-2.0 #<====  *modify
+    initialVersion: 0.0.0 #<====  *modify
     git:
       author: "{{vars.author}}"
-      user: patilvinay #<====
+      user: "{{vars.user}}"
       email: "{{vars.email}}"

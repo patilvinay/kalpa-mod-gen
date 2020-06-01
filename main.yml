@@ -6,30 +6,30 @@ kalpa:
       directory: ./
 
   play:
-    - name: make dir {{item}}
+    - name: make dir {{< item >}}
       kalpa-file:
         action: mkdir
-        dir: "{{ imported.config.outDir }}"
+        dir: "{{< item >}}"
       loop:
         - "{{ imported.config.outDir }}"
         - "{{ imported.config.outDir }}/lib"
 
-    - name: Render {{item}}
+    - name: Render {{< item >}}
       kalpa-ejs:
         vars:
-          template: "{{env.PWD}}/templates/{{item}}"
-          dest: "{{ imported.config.outDir }}/{{item}}"
+          template: "{{env.PWD}}/templates/{{< item >}}"
+          dest: "{{ imported.config.outDir }}/{{< item >}}"
       loop:
         - README.md
         - LICENSE
         - package.json
         - Dockerfile
 
-    - name: Coping {{item}}
+    - name: Copying {{< item >}}
       kalpa-ejs:
         vars:
-          template: "{{env.PWD}}/templates/{{item}}"
-          dest: "{{ imported.config.outDir }}/.{{item}}"
+          template: "{{env.PWD}}/templates/{{< item >}}"
+          dest: "{{ imported.config.outDir }}/.{{< item >}}"
       loop:
         - editorconfig
         - eslintignore

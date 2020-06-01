@@ -1,0 +1,4 @@
+*.*.yml
+**/*.*.yml
+**/node_modules
+.vscode

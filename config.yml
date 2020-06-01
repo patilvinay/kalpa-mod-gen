@@ -1,7 +1,7 @@
 kalpa:
   vars:
     #outDir: "{{env.HOME}}/d2/kalpam-modules"
-    outDir: "{{env.PWD}}/{{vars.moduleName}}"
+    outDir: "{{env.PWD}}/../{{vars.moduleName}}"
     moduleName: kalpa-sample #<==== *modify
     repo: "git@github.com:{{ vars.git.user }}/{{ vars.moduleName }}.git" #<==== modify if needed
     author: Vinay Patil #<====

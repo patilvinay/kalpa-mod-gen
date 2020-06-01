@@ -6,6 +6,13 @@ kalpa:
       directory: ./
 
   play:
+    - name: remove dir {{< item >}}
+      kalpa-file:
+        action: remove
+        target: "{{< item >}}"
+      loop:
+        - "{{ imported.config.outDir }}"
+
     - name: make dir {{< item >}}
       kalpa-file:
         action: mkdir
@@ -44,3 +51,18 @@ kalpa:
         vars:
           template: "{{env.PWD}}/templates/index.js"
           dest: "{{ imported.config.outDir }}/lib/index.js"
+
+    - name: Initialise git repo
+      kalpa-simple-git:
+        action: init
+        opts:
+          dir: "{{ imported.config.outDir }}"
+          add: -A
+          origin: "{{imported.config.repo}}"
+          commit: ":tada: Initial Commit"
+
+      debug:
+        - "--->Initialising repo Creating<---"
+        - "Repo Path  {{ imported.config.outDir }}"
+        - " Origin {{imported.config.repo}} "
+        - "--->Initialising repo Creating<---"
